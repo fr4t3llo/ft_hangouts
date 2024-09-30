@@ -18,7 +18,7 @@ The goal of this project is to get you acquainted with mobile app development. Y
 Do not use the shared contact table and create your own.
 
 
-# bonus
+# requeriments (bonus)
 * Have a picture for each contact.
 * When receiving a text message, a new contact is instantly created with the number
 as the contact name.
