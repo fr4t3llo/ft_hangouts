@@ -4,16 +4,15 @@ The goal of this project is to get you acquainted with mobile app development. Y
 
 # requeriments
 
-1 - create contacts (containing at least 5 details), edit them, and delete them.<br/> 
-2 - communicate with the contact through text messages.<br/>
-3 - Contacts will be recorded persistently using an SQLite database.<br/>
-4 - each contact will appear as a list on the app’s homepage.<br/>
-5 - You should be able to click on each contact to view their details.<br/>
-6 - Your app will have to propose two different languages, one being the default language (change the system language for a test).<br/>
-7 - When you’re on the homepage and set the app in the background, the date will be saved and will show in a toast when you return to the front.<br/>
-8 - the app icon will have to be the 42 logo.<br/>
-9 - create a menu that will allow you to change the app’s header color.<br/>
+*  create contacts (containing at least 5 details), edit them, and delete them.<br/> 
+*  communicate with the contact through text messages.<br/>
+*  Contacts will be recorded persistently using an SQLite database.<br/>
+*  each contact will appear as a list on the app’s homepage.<br/>
+*  You should be able to click on each contact to view their details.<br/>
+*  Your app will have to propose two different languages, one being the default language (change the system language for a test).<br/>
+*  When you’re on the homepage and set the app in the background, the date will be saved and will show in a toast when you return to the front.<br/>
+*  the app icon will have to be the 42 logo.<br/>
+*  create a menu that will allow you to change the app’s header color.<br/>
 
 
-Do not use the
-shared contact table and create your own.
+Do not use the shared contact table and create your own.
