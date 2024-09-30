@@ -2,7 +2,7 @@
 The goal of this project is to get you acquainted with mobile app development. You will create a contact management mobile app. You will have to understand how an mobile app functions, how mobile manages your application and how to use the SDK
 
 
-# requeriments (Mandatory)
+# requirement (Mandatory)
 
 *  create contacts (containing at least 5 details), edit them, and delete them.<br/> 
 *  communicate with the contact through text messages.<br/>
@@ -18,7 +18,7 @@ The goal of this project is to get you acquainted with mobile app development. Y
 Do not use the shared contact table and create your own.
 
 
-# requeriments (bonus)
+# requirement (bonus)
 * Have a picture for each contact.
 * When receiving a text message, a new contact is instantly created with the number
 as the contact name.
