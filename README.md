@@ -19,8 +19,8 @@ Do not use the shared contact table and create your own.
 
 
 # requirement (bonus)
-* Have a picture for each contact.
+* Have a picture for each contact.<br/>
 * When receiving a text message, a new contact is instantly created with the number
-as the contact name.
-* It’s beautiful ! Material Design is cool !
-* You can call the contact
+as the contact name.<br/>
+* It’s beautiful ! Material Design is cool !<br/>
+* You can call the contact<br/>
