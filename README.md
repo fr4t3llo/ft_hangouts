@@ -4,7 +4,7 @@ The goal of this project is to get you acquainted with mobile app development. Y
 
 ## requeriments
 
-1 - create contacts (containing at least 5 details), edit them, and delete them.\n< br / > 
+1 - create contacts (containing at least 5 details), edit them, and delete them.\n<br/> 
 2 - communicate with the contact through text messages.< br / > 
 3 - Contacts will be recorded persistently using an SQLite database.< br / > 
 4 - each contact will appear as a list on the app’s homepage< br / > 
