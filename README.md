@@ -2,7 +2,7 @@
 The goal of this project is to get you acquainted with mobile app development. You will create a contact management mobile app. You will have to understand how an mobile app functions, how mobile manages your application and how to use the SDK
 
 
-# requeriments
+# requeriments (Mandatory)
 
 *  create contacts (containing at least 5 details), edit them, and delete them.<br/> 
 *  communicate with the contact through text messages.<br/>
