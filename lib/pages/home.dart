@@ -7,17 +7,41 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+String contactName = 'saifeddine kasmi';
+
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 0, 85, 103),
       appBar: AppBar(
-        title: const Center(
+        title: Center(
             child: Text(
-          'Create Contact',
-          style: TextStyle(fontFamily: 'my', fontWeight: FontWeight.bold),
+          contactName,
+          style: const TextStyle(fontFamily: 'my', fontWeight: FontWeight.bold),
         )),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10), color: Colors.amber),
+              width: screenSize.width - 20,
+              height: 300,
+              child: Container(
+                height: 10,
+                width: screenSize.width - 250,
+                decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 219, 27, 27)),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
