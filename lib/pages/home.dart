@@ -15,18 +15,17 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 0, 85, 103),
+      backgroundColor: const Color.fromARGB(255, 0, 85, 103),
       appBar: AppBar(
         title: Center(
             child: Text(
           contactName,
-          style: TextStyle(fontFamily: 'my', fontWeight: FontWeight.bold),
+          style: const TextStyle(fontFamily: 'my', fontWeight: FontWeight.bold),
         )),
       ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(
                 height: 10,
@@ -40,16 +39,16 @@ class _HomePageState extends State<HomePage> {
                         BoxShadow(
                           blurRadius: 25,
                           blurStyle: BlurStyle.normal,
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 59, 59, 59),
                           offset: Offset.zero,
-                          spreadRadius: 1,
+                          spreadRadius: 0.05,
                         ),
                       ],
                       image: const DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage('assets/images/skasmi.jpeg'),
                       ),
-                      borderRadius: BorderRadius.circular(260),
+                      borderRadius: BorderRadius.circular(15),
                       color: Colors.white,
                     ),
                     height: 150,
@@ -59,8 +58,7 @@ class _HomePageState extends State<HomePage> {
                     bottom: 0,
                     right: 0,
                     child: IconButton(
-                      icon: const Icon(Iconsax.edit5,
-                          color: Colors.white), // Use your icon here
+                      icon: const Icon(Iconsax.edit5, color: Colors.white),
                       onPressed: () {
                         debugPrint("Edit Picture");
                       },
@@ -68,7 +66,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.only(
                     bottom: 8.0, left: 15, right: 15, top: 20),
@@ -169,10 +166,21 @@ class _HomePageState extends State<HomePage> {
               Column(
                 children: [
                   const SizedBox(height: 20),
-                  const Text(
-                    'contact infos',
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  Container(
+                      decoration: BoxDecoration(
+                          color: Colors.blueGrey,
+                          borderRadius: BorderRadius.circular(4.0)),
+                      child: const Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: const Text(
+                          'contact infos',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontFamily: 'my'),
+                        ),
+                      )),
+                  const SizedBox(height: 30),
                   const Text(
                     'First name',
                     style: TextStyle(color: Colors.white),
@@ -184,12 +192,16 @@ class _HomePageState extends State<HomePage> {
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             fillColor: Colors.white,
-                            hintStyle: TextStyle(color: Colors.white),
+                            hintStyle: TextStyle(
+                                color: Colors.white, fontFamily: 'my2'),
                             focusColor: Colors.black,
                             hintText: 'saifeddine',
                           ))),
                   const SizedBox(height: 15),
-                  Text('Last name'),
+                  const Text(
+                    'Last name',
+                    style: TextStyle(color: Colors.white, fontFamily: 'my'),
+                  ),
                   Container(
                       width: screenSize.width - 30,
                       child: const TextField(
@@ -197,12 +209,16 @@ class _HomePageState extends State<HomePage> {
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             fillColor: Colors.white,
-                            hintStyle: TextStyle(color: Colors.white),
+                            hintStyle: TextStyle(
+                                color: Colors.white, fontFamily: 'my2'),
                             focusColor: Colors.black,
                             hintText: 'kasmi',
                           ))),
                   const SizedBox(height: 15),
-                  Text('Number phone'),
+                  const Text(
+                    'Number phone',
+                    style: TextStyle(color: Colors.white, fontFamily: 'my'),
+                  ),
                   Container(
                       width: screenSize.width - 30,
                       child: const TextField(
@@ -210,7 +226,10 @@ class _HomePageState extends State<HomePage> {
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             fillColor: Colors.white,
-                            hintStyle: TextStyle(color: Colors.white),
+                            hintStyle: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'my',
+                                fontSize: 15),
                             focusColor: Colors.black,
                             hintText: '+212661189840',
                           )))
