@@ -52,6 +52,24 @@ class _HomePageState extends State<HomePage> {
                 width: 150,
                 // decoration: BoxDecoration(color: Colors.white),
               ),
+              const SizedBox(height: 10),
+              ElevatedButton.icon(
+                style: ButtonStyle(
+                
+                    shadowColor: WidgetStateProperty.all<Color>(
+                        const Color.fromARGB(255, 255, 255, 255)),
+                    backgroundColor: WidgetStateProperty.all<Color>(
+                        const Color.fromARGB(255, 63, 2, 24))),
+                icon: const Icon(
+                  Iconsax.add_square,
+                  color: Colors.white,
+                ),
+                label: const Text(
+                  'Add Photo',
+                  style: TextStyle(fontFamily: 'my', color: Colors.white),
+                ),
+                onPressed: () {},
+              ),
               Padding(
                 padding: const EdgeInsets.only(
                     bottom: 8.0, left: 15, right: 15, top: 20),
@@ -148,9 +166,23 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                
               ),
-              Column(),
+              Column(
+                children: [
+                  // Text('name'),
+                  Container(
+                      width: screenSize.width - 30,
+                      child: const TextField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            fillColor: Colors.white,
+                            hintStyle: TextStyle(color: Colors.white),
+                            focusColor: Colors.black,
+                            hintText: 'saifeddine',
+                          )))
+                ],
+              ),
             ],
           ),
         ),
