@@ -31,45 +31,44 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 10,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
-                    boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 25,
-                        blurStyle: BlurStyle.normal,
-                        color: Colors.black,
-                        offset: Offset.zero,
-                        spreadRadius: 1,
-                      ),
-                    ],
-                    image: const DecorationImage(
+              Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white),
+                      boxShadow: const [
+                        BoxShadow(
+                          blurRadius: 25,
+                          blurStyle: BlurStyle.normal,
+                          color: Colors.black,
+                          offset: Offset.zero,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                      image: const DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage('assets/images/me.png')),
-                    borderRadius: BorderRadius.circular(260),
-                    color: Colors.white),
-                height: 150,
-                width: 150,
-                // decoration: BoxDecoration(color: Colors.white),
+                        image: AssetImage('assets/images/skasmi.jpeg'),
+                      ),
+                      borderRadius: BorderRadius.circular(260),
+                      color: Colors.white,
+                    ),
+                    height: 150,
+                    width: 150,
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: IconButton(
+                      icon: const Icon(Iconsax.edit5,
+                          color: Colors.white), // Use your icon here
+                      onPressed: () {
+                        debugPrint("Edit Picture");
+                      },
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 10),
-              ElevatedButton.icon(
-                style: ButtonStyle(
-                
-                    shadowColor: WidgetStateProperty.all<Color>(
-                        const Color.fromARGB(255, 255, 255, 255)),
-                    backgroundColor: WidgetStateProperty.all<Color>(
-                        const Color.fromARGB(255, 63, 2, 24))),
-                icon: const Icon(
-                  Iconsax.add_square,
-                  color: Colors.white,
-                ),
-                label: const Text(
-                  'Add Photo',
-                  style: TextStyle(fontFamily: 'my', color: Colors.white),
-                ),
-                onPressed: () {},
-              ),
               Padding(
                 padding: const EdgeInsets.only(
                     bottom: 8.0, left: 15, right: 15, top: 20),
@@ -169,7 +168,15 @@ class _HomePageState extends State<HomePage> {
               ),
               Column(
                 children: [
-                  // Text('name'),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'contact infos',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  const Text(
+                    'First name',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   Container(
                       width: screenSize.width - 30,
                       child: const TextField(
@@ -180,6 +187,32 @@ class _HomePageState extends State<HomePage> {
                             hintStyle: TextStyle(color: Colors.white),
                             focusColor: Colors.black,
                             hintText: 'saifeddine',
+                          ))),
+                  const SizedBox(height: 15),
+                  Text('Last name'),
+                  Container(
+                      width: screenSize.width - 30,
+                      child: const TextField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            fillColor: Colors.white,
+                            hintStyle: TextStyle(color: Colors.white),
+                            focusColor: Colors.black,
+                            hintText: 'kasmi',
+                          ))),
+                  const SizedBox(height: 15),
+                  Text('Number phone'),
+                  Container(
+                      width: screenSize.width - 30,
+                      child: const TextField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            fillColor: Colors.white,
+                            hintStyle: TextStyle(color: Colors.white),
+                            focusColor: Colors.black,
+                            hintText: '+212661189840',
                           )))
                 ],
               ),
