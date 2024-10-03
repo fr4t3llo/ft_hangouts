@@ -185,7 +185,7 @@ class _HomePageState extends State<HomePage> {
                     'First name',
                     style: TextStyle(color: Colors.white),
                   ),
-                  Container(
+                  SizedBox(
                       width: screenSize.width - 30,
                       child: const TextField(
                           obscureText: true,
@@ -202,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                     'Last name',
                     style: TextStyle(color: Colors.white, fontFamily: 'my'),
                   ),
-                  Container(
+                  SizedBox(
                       width: screenSize.width - 30,
                       child: const TextField(
                           obscureText: true,
@@ -219,20 +219,38 @@ class _HomePageState extends State<HomePage> {
                     'Number phone',
                     style: TextStyle(color: Colors.white, fontFamily: 'my'),
                   ),
-                  Container(
-                      width: screenSize.width - 30,
-                      child: const TextField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            fillColor: Colors.white,
-                            hintStyle: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'my',
-                                fontSize: 15),
-                            focusColor: Colors.black,
-                            hintText: '+212661189840',
-                          )))
+                  SizedBox(
+                    width: screenSize.width - 30,
+                    child: const TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        fillColor: Colors.white,
+                        hintStyle: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'my',
+                            fontSize: 15),
+                        focusColor: Colors.black,
+                        hintText: '+212661189840',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 2,
+                      backgroundColor: Colors.blue,
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      'Save',
+                      style: TextStyle(
+                        fontFamily: 'my',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ],
