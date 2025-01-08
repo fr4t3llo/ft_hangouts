@@ -7,10 +7,9 @@ class AllContacts extends StatelessWidget {
   final String contactName = 'saifeddine';
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: const Color.fromARGB(0, 99, 25, 25),
           leading: IconButton(
             icon: const Icon(Iconsax.backward1, color: Colors.black),
             onPressed: () => {
@@ -34,7 +33,7 @@ class AllContacts extends StatelessWidget {
           ),
         ),
         backgroundColor: const Color.fromARGB(255, 75, 75, 75),
-      ),
-    );
+      );
+
   }
 }

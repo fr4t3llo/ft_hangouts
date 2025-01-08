@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ft_hangouts/pages/home.dart';
+// ignore: depend_on_referenced_packages
 import 'package:device_preview_plus/device_preview_plus.dart';
 
 void main() => runApp(
@@ -14,8 +15,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-
+    return const MaterialApp(
       home: HomePage(),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ft_hangouts/pages/all_contacts.dart';
 import 'package:ft_hangouts/pages/components/column.dart';
 import 'package:ft_hangouts/pages/components/contactinfos.dart';
+// ignore: depend_on_referenced_packages
 import 'package:iconsax/iconsax.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 106, 125),
+      // backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       // extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
             Navigator.push(
                 context,
                 PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => AllContacts(),
+                  pageBuilder: (_, __, ___) => const AllContacts(),
                   // transitionDuration: Duration(seconds: 1),
                   transitionsBuilder: (_, a, __, c) =>
                       FadeTransition(opacity: a, child: c),
@@ -91,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     MyColumn(
                       mycolor: const Color(0xFFD00000),
-                      text: 'Edit',
+                      text: 'delete',
                       icon: IconButton(
                           onPressed: () {},
                           icon: const Icon(Iconsax.profile_delete,
@@ -99,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     MyColumn(
                       mycolor: const Color(0xFFF7941D),
-                      text: 'Edit',
+                      text: 'message',
                       icon: IconButton(
                           onPressed: () {},
                           icon: const Icon(Iconsax.message,
@@ -115,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     MyColumn(
                       mycolor: const Color(0xFFFF5FF9),
-                      text: 'Edit',
+                      text: 'edit',
                       icon: IconButton(
                           onPressed: () {},
                           icon: const Icon(Iconsax.edit,
@@ -143,7 +144,8 @@ class _HomePageState extends State<HomePage> {
                       )),
                   const SizedBox(height: 30),
                   const Contactinfos(
-                      text: 'First name', hintText: 'saifeddine'),
+                    
+                      text: 'First name', hintText: 'saifeddine', ),
                   const SizedBox(height: 15),
                   const Contactinfos(text: 'Last name', hintText: 'kasmi'),
                   const SizedBox(height: 15),

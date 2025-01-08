@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 class MyColumn extends StatelessWidget {
-  const MyColumn({super.key, required this.mycolor, required this.text, required this.icon});
+  const MyColumn(
+      {super.key,
+      required this.mycolor,
+      required this.text,
+      required this.icon});
   final Color mycolor;
   final String text;
   final IconButton icon;
@@ -18,7 +21,10 @@ class MyColumn extends StatelessWidget {
         const SizedBox(height: 3),
         Text(
           text,
-          style: const TextStyle(color: Colors.white, fontFamily: 'my'),
+          style: const TextStyle(
+              color: Colors.black,
+              fontFamily: 'my',
+              fontWeight: FontWeight.bold),
         )
       ],
     );
