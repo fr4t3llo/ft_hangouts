@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       // extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -127,25 +127,23 @@ class _HomePageState extends State<HomePage> {
               ),
               Column(
                 children: [
-                  const SizedBox(height: 20),
-                  Container(
-                      decoration: BoxDecoration(
-                          color: Colors.blueGrey,
-                          borderRadius: BorderRadius.circular(4.0)),
-                      child: const Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: const Text(
-                          'contact infos',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontFamily: 'my'),
-                        ),
-                      )),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 10),
+                  const Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Text(
+                      'contact infos',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'my',
+                      ),
+                    ),
+                  ),
                   const Contactinfos(
-                    
-                      text: 'First name', hintText: 'saifeddine', ),
+                    text: 'First name',
+                    hintText: 'saifeddine',
+                  ),
                   const SizedBox(height: 15),
                   const Contactinfos(text: 'Last name', hintText: 'kasmi'),
                   const SizedBox(height: 15),

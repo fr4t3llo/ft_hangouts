@@ -9,12 +9,18 @@ class Contactinfos extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
     return Column(
       children: [
-        Text(
-          text,
-          style: const TextStyle(
-              color: Colors.black87,
-              fontFamily: 'my',
-              fontWeight: FontWeight.bold),
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0, bottom: 5),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: Text(
+              text,
+              style: const TextStyle(
+                  color: Colors.black87,
+                  fontFamily: 'my',
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
         ),
         SizedBox(
           width: screenSize.width - 30,
