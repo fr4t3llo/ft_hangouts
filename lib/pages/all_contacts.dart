@@ -16,7 +16,7 @@ class AllContacts extends StatelessWidget {
               Navigator.push(
                 context,
                 PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => HomePage(),
+                  pageBuilder: (_, __, ___) => const HomePage(),
                   // transitionDuration: Duration(seconds: 1),
                   transitionsBuilder: (_, a, __, c) =>
                       FadeTransition(opacity: a, child: c),

@@ -42,6 +42,7 @@ dev_dependencies:
   device_preview_plus: 
   iconsax: ^0.0.8
   flutter_contacts: ^1.1.9+2
+  flutter_launcher_icons: ^0.14.3
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -78,7 +79,6 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-
   fonts:
     - family: my
       fonts:
@@ -87,5 +87,9 @@ flutter:
       fonts:
         - asset: assets/fonts/SailerTrial-Medium.ttf
   #
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/ft_hangouts_icon.png"
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
