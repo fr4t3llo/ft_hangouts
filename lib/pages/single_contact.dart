@@ -44,6 +44,14 @@ class _HomePageState extends State<HomePage> {
           '${contact.name.first} ${contact.name.last}', // Use contact name
           style: const TextStyle(fontFamily: 'my', fontWeight: FontWeight.bold),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Iconsax.edit,
+                color: Colors.black,
+              ))
+        ],
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -87,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.only(
                     bottom: 8.0, left: 15, right: 15, top: 20),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     MyColumn(
                       mycolor: const Color(0xFFD00000),
@@ -113,32 +121,13 @@ class _HomePageState extends State<HomePage> {
                           icon: const Icon(Iconsax.call,
                               color: Colors.white, size: 20)),
                     ),
-                    MyColumn(
-                      mycolor: const Color(0xFFFF5FF9),
-                      text: 'edit',
-                      icon: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Iconsax.edit,
-                              color: Colors.white, size: 20)),
-                    ),
                   ],
                 ),
               ),
               Column(
                 children: [
-                  const SizedBox(height: 10),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      'Contact Infos',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'my',
-                      ),
-                    ),
-                  ),
+                  const SizedBox(height: 20),
+
                   // Displaying the contact details
                   Contactinfos(
                     text: 'First name',
@@ -156,35 +145,14 @@ class _HomePageState extends State<HomePage> {
                         ? contact.phones.first.number
                         : 'No number available',
                   ),
-                  const SizedBox(height: 60),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      elevation: 2,
-                      backgroundColor: Colors.blue,
-                    ),
-                    onPressed: () {},
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 20 / 100,
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Edit',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontFamily: 'my',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Icon(
-                            Iconsax.save_2,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                    ),
+                  const SizedBox(height: 15),
+                  Contactinfos(
+                    text: 'Email',
+                    hintText: contact.phones.isNotEmpty
+                        ? contact.emails.first.address
+                        : 'No Email available',
                   ),
+                  const SizedBox(height: 60),
                 ],
               ),
             ],

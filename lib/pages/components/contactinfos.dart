@@ -10,15 +10,17 @@ class Contactinfos extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 8.0, bottom: 5),
+          padding: const EdgeInsets.only(left: 17.0, bottom: 5),
           child: Align(
             alignment: Alignment.topLeft,
             child: Text(
               text,
               style: const TextStyle(
-                  color: Colors.black87,
-                  fontFamily: 'my',
-                  fontWeight: FontWeight.bold),
+                color: Colors.black87,
+                fontFamily: 'my',
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
             ),
           ),
         ),
@@ -26,17 +28,14 @@ class Contactinfos extends StatelessWidget {
           width: screenSize.width - 30,
           child: TextField(
             readOnly: true,
+            textAlign: TextAlign.center,
             // obscureText: true,
             decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              fillColor: Colors.black87,
-              labelStyle: const TextStyle(color: Colors.amber),
               hintStyle: const TextStyle(
-                color: Colors.black87,
+                color: Color.fromARGB(221, 124, 66, 0),
                 fontFamily: 'my',
                 fontWeight: FontWeight.bold,
               ),
-              focusColor: Colors.black,
               hintText: hintText,
             ),
           ),
