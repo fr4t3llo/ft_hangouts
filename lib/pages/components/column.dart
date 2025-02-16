@@ -15,12 +15,13 @@ class MyColumn extends StatelessWidget {
       children: [
         Container(
             height: 50,
-            width: 80,
+            width: 50,
             decoration: BoxDecoration(
-              color: Colors.grey,
+              // border: Border.all(),
+              color: const Color.fromARGB(255, 255, 255, 255),
               borderRadius: BorderRadius.circular(5),
             ),
-            child: icon),
+            child: icon,),
         const SizedBox(height: 3),
         Text(
           text,

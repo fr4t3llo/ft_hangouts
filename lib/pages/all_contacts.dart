@@ -13,15 +13,7 @@ class AllContacts extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Iconsax.backward1, color: Colors.black),
           onPressed: () => {
-            // Navigator.push(
-            //   context,
-            //   PageRouteBuilder(
-            //     pageBuilder: (_, __, ___) => HomePage(contact: null,),
-            //     // transitionDuration: Duration(seconds: 1),
-            //     transitionsBuilder: (_, a, __, c) =>
-            //         FadeTransition(opacity: a, child: c),
-            //   ),
-            // ),
+          
           },
         ),
         title: Center(

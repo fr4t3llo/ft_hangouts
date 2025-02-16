@@ -79,6 +79,12 @@ class _ContactPageState extends State<ContactPage> {
               icon: const Icon(Icons.refresh, color: Colors.black),
               onPressed: _checkPermissionAndFetchContacts,
             ),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.add,
+                color: Colors.black,
+              ))
         ],
       ),
       body: _buildBody(),
