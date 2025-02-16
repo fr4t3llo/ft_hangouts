@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ft_hangouts/pages/single_contact.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 
@@ -166,7 +167,14 @@ class _ContactPageState extends State<ContactPage> {
                 )
               : null,
           onTap: () {
-            debugPrint('Tapped contact: ${contact.displayName}');
+            // Navigate to HomePage and pass the selected contact
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    HomePage(contact: contact), // Pass the contact data
+              ),
+            );
           },
         );
       },

@@ -25,6 +25,7 @@ class Contactinfos extends StatelessWidget {
         SizedBox(
           width: screenSize.width - 30,
           child: TextField(
+            readOnly: true,
             // obscureText: true,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),

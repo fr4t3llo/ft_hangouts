@@ -13,11 +13,14 @@ class MyColumn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CircleAvatar(
-          radius: 30,
-          backgroundColor: mycolor,
-          child: icon,
-        ),
+        Container(
+            height: 50,
+            width: 80,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: icon),
         const SizedBox(height: 3),
         Text(
           text,
