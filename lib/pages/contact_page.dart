@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ft_hangouts/pages/single_contact.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
+import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
+import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({super.key});
@@ -14,6 +18,9 @@ class _ContactPageState extends State<ContactPage> {
   List<Contact>? _contacts;
   bool _permissionDenied = false;
   String? _error;
+
+  // Default AppBar color
+  Color _appBarColor = Colors.transparent;
 
   @override
   void initState() {
@@ -57,37 +64,71 @@ class _ContactPageState extends State<ContactPage> {
     }
   }
 
+  // Function to change the AppBar color
+  void _changeAppBarColor(Color color) {
+    setState(() {
+      _appBarColor = color;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(Iconsax.back_square, color: Colors.black),
-          onPressed: () => {},
-        ),
-        title: const Text(
-          'Contact',
-          style: TextStyle(
-            fontFamily: 'my',
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        actions: [
-          if (_error != null || _permissionDenied)
-            IconButton(
-              icon: const Icon(Icons.refresh, color: Colors.black),
-              onPressed: _checkPermissionAndFetchContacts,
+    return Consumer<AppBarColorProvider>(
+      builder: (context, appBarColorProvider, child) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: appBarColorProvider.appBarColor,
+            leading: IconButton(
+              icon: const Icon(Iconsax.add, color: Colors.black),
+              onPressed: () => {},
             ),
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.add,
-                color: Colors.black,
-              ))
-        ],
-      ),
-      body: _buildBody(),
+            title: const Text(
+              'Contact',
+              style: TextStyle(
+                fontFamily: 'my',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.menu, color: Colors.black),
+                onPressed: () {
+                  // Show the PopupMenuButton to choose a color
+                  showMenu<Color>(
+                    context: context,
+                    position: const RelativeRect.fromLTRB(
+                        100, 50, 0, 0), // Position the menu
+                    items: [
+                      const PopupMenuItem<Color>(
+                        value: Colors.blue,
+                        child: Text('Blue'),
+                      ),
+                      const PopupMenuItem<Color>(
+                        value: Colors.red,
+                        child: Text('Red'),
+                      ),
+                      const PopupMenuItem<Color>(
+                        value: Colors.green,
+                        child: Text('Green'),
+                      ),
+                      const PopupMenuItem<Color>(
+                        value: Colors.purple,
+                        child: Text('Purple'),
+                      ),
+                    ],
+                  ).then((value) {
+                    if (value != null) {
+                      appBarColorProvider
+                          .updateColor(value); // Change the AppBar color
+                    }
+                  });
+                },
+              ),
+            ],
+          ),
+          body: _buildBody(),
+        );
+      },
     );
   }
 

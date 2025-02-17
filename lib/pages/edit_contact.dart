@@ -3,6 +3,8 @@ import 'package:ft_hangouts/pages/contact_page.dart';
 import 'package:ft_hangouts/pages/components/editcontactinfo.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
+import 'package:provider/provider.dart';
 
 class EditContact extends StatefulWidget {
   final Contact contact;
@@ -118,74 +120,77 @@ class _EditContactState extends State<EditContact> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(
-            Iconsax.back_square,
-            color: Colors.black,
-            size: 30,
-          ),
-          onPressed: () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const ContactPage()),
-          ),
-        ),
-        title: const Text(
-          'Edit Contact',
-          style: TextStyle(fontFamily: 'my', fontWeight: FontWeight.bold),
-        ),
-        actions: [
-          if (_isSaving)
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: CircularProgressIndicator(),
-            )
-          else
-            IconButton(
-              onPressed: _saveContact,
-              icon: const Icon(
-                Icons.save_as_outlined,
-                color: Color.fromARGB(255, 0, 0, 0),
-                size: 30,
-              ),
+    return Consumer<AppBarColorProvider>(
+        builder: (context, appBarColorProvider, child) {
+      return Scaffold(
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        appBar: AppBar(
+          backgroundColor: appBarColorProvider.appBarColor,
+          leading: IconButton(
+            icon: const Icon(
+              Iconsax.back_square,
+              color: Colors.black,
+              size: 30,
             ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              const SizedBox(height: 30),
-              Editcontactinfo(
-                icon: const Icon(Icons.contacts),
-                text: 'First name',
-                controller: firstNameController,
+            onPressed: () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const ContactPage()),
+            ),
+          ),
+          title: const Text(
+            'Edit Contact',
+            style: TextStyle(fontFamily: 'my', fontWeight: FontWeight.bold),
+          ),
+          actions: [
+            if (_isSaving)
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: CircularProgressIndicator(),
+              )
+            else
+              IconButton(
+                onPressed: _saveContact,
+                icon: const Icon(
+                  Icons.save_as_outlined,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  size: 30,
+                ),
               ),
-              const SizedBox(height: 15),
-              Editcontactinfo(
-                icon: const Icon(Icons.contacts_rounded),
-                text: 'Last name',
-                controller: lastNameController,
-              ),
-              const SizedBox(height: 15),
-              Editcontactinfo(
-                icon: const Icon(Icons.phone),
-                text: 'Phone Number',
-                controller: phoneController,
-              ),
-              const SizedBox(height: 15),
-              Editcontactinfo(
-                icon: const Icon(Icons.email),
-                text: 'Email',
-                controller: emailController,
-              ),
-            ],
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                const SizedBox(height: 30),
+                Editcontactinfo(
+                  icon: const Icon(Icons.contacts),
+                  text: 'First name',
+                  controller: firstNameController,
+                ),
+                const SizedBox(height: 15),
+                Editcontactinfo(
+                  icon: const Icon(Icons.contacts_rounded),
+                  text: 'Last name',
+                  controller: lastNameController,
+                ),
+                const SizedBox(height: 15),
+                Editcontactinfo(
+                  icon: const Icon(Icons.phone),
+                  text: 'Phone Number',
+                  controller: phoneController,
+                ),
+                const SizedBox(height: 15),
+                Editcontactinfo(
+                  icon: const Icon(Icons.email),
+                  text: 'Email',
+                  controller: emailController,
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
