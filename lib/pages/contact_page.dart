@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ft_hangouts/pages/add_new_contact.dart';
 import 'package:ft_hangouts/pages/single_contact.dart';
+import 'package:ft_hangouts/translations/locale_keys.g.dart';
 // ignore: depend_on_referenced_packages
 import 'package:iconsax/iconsax.dart';
 // ignore: depend_on_referenced_packages
@@ -8,6 +9,8 @@ import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
 // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
+import '../translations/locale_keys.g.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({super.key});
@@ -84,14 +87,32 @@ class _ContactPageState extends State<ContactPage> {
                 );
               },
             ),
-            title: const Text(
-              'Contact',
-              style: TextStyle(
+            title: Text(
+              LocaleKeys.contact.tr(),
+              style: const TextStyle(
                 fontFamily: 'my',
                 fontWeight: FontWeight.bold,
               ),
             ),
             actions: [
+              SizedBox(
+                height: 200,
+                width: 200,
+                child: Row(
+                  children: [
+                    ElevatedButton(
+                        onPressed: () async {
+                          await context.setLocale(const Locale('es'));
+                        },
+                        child: const Text('spanish')),
+                    ElevatedButton(
+                        onPressed: () async {
+                          await context.setLocale(const Locale('en'));
+                        },
+                        child: const Text('english')),
+                  ],
+                ),
+              ),
               IconButton(
                 icon: const Icon(Icons.menu, color: Colors.black),
                 onPressed: () {
