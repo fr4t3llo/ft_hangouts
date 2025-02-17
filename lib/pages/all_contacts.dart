@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ft_hangouts/pages/single_contact.dart';
+// ignore: depend_on_referenced_packages
 import 'package:iconsax/iconsax.dart';
 
 class AllContacts extends StatelessWidget {

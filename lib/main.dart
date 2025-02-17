@@ -1,6 +1,7 @@
+// ignore_for_file: depend_on_referenced_packages, unused_import, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:ft_hangouts/pages/contact_page.dart';
-// ignore: depend_on_referenced_packages
 import 'package:device_preview_plus/device_preview_plus.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +15,7 @@ void main() {
     ),
   );
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-       theme: ThemeData(
+      theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: const ContactPage(),

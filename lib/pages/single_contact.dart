@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:ft_hangouts/pages/all_contacts.dart';
 import 'package:ft_hangouts/pages/components/column.dart';
 import 'package:ft_hangouts/pages/components/contactinfos.dart';
 import 'package:ft_hangouts/pages/edit_contact.dart';
+// ignore: depend_on_referenced_packages
 import 'package:iconsax/iconsax.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter_contacts/flutter_contacts.dart';
+// ignore: depend_on_referenced_packages
 import 'package:url_launcher/url_launcher.dart';
+// ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
 import 'contact_page.dart';

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ft_hangouts/pages/add_new_contact.dart';
 import 'package:ft_hangouts/pages/single_contact.dart';
+// ignore: depend_on_referenced_packages
 import 'package:iconsax/iconsax.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
+// ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
-import 'package:provider/provider.dart';
-import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({super.key});
@@ -21,7 +22,6 @@ class _ContactPageState extends State<ContactPage> {
   String? _error;
 
   // Default AppBar color
-  Color _appBarColor = Colors.transparent;
 
   @override
   void initState() {
@@ -66,11 +66,6 @@ class _ContactPageState extends State<ContactPage> {
   }
 
   // Function to change the AppBar color
-  void _changeAppBarColor(Color color) {
-    setState(() {
-      _appBarColor = color;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

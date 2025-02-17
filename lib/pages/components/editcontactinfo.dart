@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 class Editcontactinfo extends StatelessWidget {
@@ -6,11 +8,11 @@ class Editcontactinfo extends StatelessWidget {
   final TextEditingController controller;
 
   const Editcontactinfo({
-    Key? key,
+    super.key,
     required this.icon,
     required this.text,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

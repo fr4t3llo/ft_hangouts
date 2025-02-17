@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:ft_hangouts/pages/contact_page.dart';
 import 'package:ft_hangouts/pages/components/editcontactinfo.dart';
