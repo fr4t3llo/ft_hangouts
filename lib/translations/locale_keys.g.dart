@@ -4,6 +4,8 @@
 
 abstract class  LocaleKeys {
   static const contact = 'contact';
+  static const language = 'language';
+  static const app_bar_color = 'app_bar_color';
   static const add_contact = 'add_contact';
   static const edit_contact = 'edit_contact';
   static const first_name = 'first_name';

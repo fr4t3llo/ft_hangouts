@@ -1,5 +1,7 @@
 {
   "contact": "Contact",
+  "language": "language",
+  "app_bar_color": "AppBar Color",
   "add_contact": "Add Contact",
   "edit_contact": "Edit Contact",
   "first_name": "First name",

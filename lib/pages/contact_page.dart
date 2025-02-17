@@ -95,58 +95,106 @@ class _ContactPageState extends State<ContactPage> {
               ),
             ),
             actions: [
-              SizedBox(
-                height: 200,
-                width: 200,
-                child: Row(
-                  children: [
-                    ElevatedButton(
-                        onPressed: () async {
-                          await context.setLocale(const Locale('es'));
-                        },
-                        child: const Text('spanish')),
-                    ElevatedButton(
-                        onPressed: () async {
-                          await context.setLocale(const Locale('en'));
-                        },
-                        child: const Text('english')),
-                  ],
-                ),
-              ),
               IconButton(
                 icon: const Icon(Icons.menu, color: Colors.black),
                 onPressed: () {
-                  // Show the PopupMenuButton to choose a color
-                  showMenu<Color>(
+                  // Show the PopupMenuButton to choose a color or language
+                  showMenu<dynamic>(
                     context: context,
                     position: const RelativeRect.fromLTRB(
                         100, 50, 0, 0), // Position the menu
                     items: [
+                      PopupMenuItem(
+                        enabled: false,
+                        child: Text(
+                          LocaleKeys.app_bar_color.tr(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54,
+                              fontFamily: 'my',
+                              fontSize: 18),
+                        ),
+                      ),
                       PopupMenuItem<Color>(
                         value: Colors.white,
-                        child: Text(LocaleKeys.white.tr()),
+                        child: Text(
+                            style: const TextStyle(
+                                fontFamily: 'my', fontWeight: FontWeight.bold),
+                            LocaleKeys.white.tr()),
                       ),
                       PopupMenuItem<Color>(
                         value: Colors.blue,
-                        child: Text(LocaleKeys.blue.tr()),
+                        child: Text(
+                            style: const TextStyle(
+                                fontFamily: 'my', fontWeight: FontWeight.bold),
+                            LocaleKeys.blue.tr()),
                       ),
                       PopupMenuItem<Color>(
                         value: Colors.red,
-                        child: Text(LocaleKeys.red.tr()),
+                        child: Text(
+                            style: const TextStyle(
+                                fontFamily: 'my', fontWeight: FontWeight.bold),
+                            LocaleKeys.red.tr()),
                       ),
                       PopupMenuItem<Color>(
                         value: Colors.green,
-                        child: Text(LocaleKeys.green.tr()),
+                        child: Text(
+                            style: const TextStyle(
+                                fontFamily: 'my', fontWeight: FontWeight.bold),
+                            LocaleKeys.green.tr()),
                       ),
                       PopupMenuItem<Color>(
                         value: Colors.purple,
-                        child: Text(LocaleKeys.purple.tr()),
+                        child: Text(
+                            style: const TextStyle(
+                                fontFamily: 'my', fontWeight: FontWeight.bold),
+                            LocaleKeys.purple.tr()),
+                      ),
+                      // Divider to separate color options from language options
+                      const PopupMenuDivider(),
+                      PopupMenuItem(
+                        enabled: false,
+                        child: Text(
+                          LocaleKeys.language.tr(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54,
+                              fontFamily: 'my',
+                              fontSize: 18),
+                        ),
+                      ),
+                      PopupMenuItem<String>(
+                        value: 'en',
+                        onTap: () => {context.setLocale(const Locale('en'))},
+                        child: const Text(
+                          'English 🇺🇸',
+                          style: TextStyle(
+                            fontFamily: 'my',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      PopupMenuItem<String>(
+                        value: 'es',
+                        onTap: () => {context.setLocale(const Locale('es'))},
+                        child: const Text(
+                          'Spanich 🇪🇸',
+                          style: TextStyle(
+                            fontFamily: 'my',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ],
                   ).then((value) {
                     if (value != null) {
-                      appBarColorProvider
-                          .updateColor(value); // Change the AppBar color
+                      if (value is Color) {
+                        appBarColorProvider
+                            .updateColor(value); // Change the AppBar color
+                      } else if (value is String) {
+                        // Language change button - onPressed is empty as requested
+                        // This is where language change logic would go
+                      }
                     }
                   });
                 },
@@ -198,7 +246,7 @@ class _ContactPageState extends State<ContactPage> {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: _checkPermissionAndFetchContacts,
-                child:  Text(LocaleKeys.request_permission.tr()),
+                child: Text(LocaleKeys.request_permission.tr()),
               ),
             ],
           ),

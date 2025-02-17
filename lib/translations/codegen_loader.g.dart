@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters, constant_identifier_names, depend_on_referenced_packages
+// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters, constant_identifier_names
 
 import 'dart:ui';
 
@@ -16,6 +16,8 @@ class CodegenLoader extends AssetLoader{
 
   static const Map<String,dynamic> _en = {
   "contact": "Contact",
+  "language": "language",
+  "app_bar_color": "AppBar Color",
   "add_contact": "Add Contact",
   "edit_contact": "Edit Contact",
   "first_name": "First name",
@@ -56,6 +58,8 @@ class CodegenLoader extends AssetLoader{
 };
 static const Map<String,dynamic> _es = {
   "contact": "Contacto",
+  "language": "idioma",
+  "app_bar_color": "Color de la barra de la aplicación",
   "add_contact": "Añadir Contacto",
   "edit_contact": "Editar Contacto",
   "first_name": "Nombre",

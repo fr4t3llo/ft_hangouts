@@ -1,5 +1,7 @@
 {
     "contact": "Contacto",
+    "language": "idioma",
+    "app_bar_color": "Color de la barra de la aplicación",
     "add_contact": "Añadir Contacto",
     "edit_contact": "Editar Contacto",
     "first_name": "Nombre",
