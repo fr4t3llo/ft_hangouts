@@ -3,11 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:ft_hangouts/pages/contact_page.dart';
 import 'package:ft_hangouts/pages/components/editcontactinfo.dart';
+import 'package:ft_hangouts/translations/locale_keys.g.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
 import 'package:provider/provider.dart';
-
+import 'package:easy_localization/easy_localization.dart';
+import '../translations/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
+import '../translations/locale_keys.g.dart';
 class EditContact extends StatefulWidget {
   final Contact contact;
 
@@ -90,8 +94,8 @@ class _EditContactState extends State<EditContact> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Contact updated successfully'),
+          SnackBar(
+            content: Text(LocaleKeys.contact_updated_successfully.tr()),
             backgroundColor: Colors.green,
           ),
         );
@@ -106,7 +110,7 @@ class _EditContactState extends State<EditContact> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error updating contact: $e'),
+            content: Text('${LocaleKeys.error_updating_contact.tr()} $e'),
             backgroundColor: Colors.red,
           ),
         );
@@ -139,9 +143,10 @@ class _EditContactState extends State<EditContact> {
               MaterialPageRoute(builder: (context) => const ContactPage()),
             ),
           ),
-          title: const Text(
-            'Edit Contact',
-            style: TextStyle(fontFamily: 'my', fontWeight: FontWeight.bold),
+          title: Text(
+            LocaleKeys.edit_contact.tr(),
+            style:
+                const TextStyle(fontFamily: 'my', fontWeight: FontWeight.bold),
           ),
           actions: [
             if (_isSaving)
@@ -167,25 +172,25 @@ class _EditContactState extends State<EditContact> {
                 const SizedBox(height: 30),
                 Editcontactinfo(
                   icon: const Icon(Icons.contacts),
-                  text: 'First name',
+                  text: LocaleKeys.first_name.tr(),
                   controller: firstNameController,
                 ),
                 const SizedBox(height: 15),
                 Editcontactinfo(
                   icon: const Icon(Icons.contacts_rounded),
-                  text: 'Last name',
+                  text: LocaleKeys.last_name.tr(),
                   controller: lastNameController,
                 ),
                 const SizedBox(height: 15),
                 Editcontactinfo(
                   icon: const Icon(Icons.phone),
-                  text: 'Phone Number',
+                  text: LocaleKeys.phone_number.tr(),
                   controller: phoneController,
                 ),
                 const SizedBox(height: 15),
                 Editcontactinfo(
                   icon: const Icon(Icons.email),
-                  text: 'Email',
+                  text: LocaleKeys.email.tr(),
                   controller: emailController,
                 ),
               ],

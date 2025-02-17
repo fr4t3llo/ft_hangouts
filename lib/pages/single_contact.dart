@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ft_hangouts/pages/components/column.dart';
 import 'package:ft_hangouts/pages/components/contactinfos.dart';
 import 'package:ft_hangouts/pages/edit_contact.dart';
+import 'package:ft_hangouts/translations/locale_keys.g.dart';
 // ignore: depend_on_referenced_packages
 import 'package:iconsax/iconsax.dart';
 // ignore: depend_on_referenced_packages
@@ -12,6 +13,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
 import 'contact_page.dart';
+import 'package:easy_localization/easy_localization.dart';
+import '../translations/locale_keys.g.dart';
 
 class HomePage extends StatefulWidget {
   final Contact contact;
@@ -37,7 +40,7 @@ class _HomePageState extends State<HomePage> {
             context: context,
             builder: (context) => AlertDialog(
               title: const Text('Error'),
-              content: const Text('Could not open Messages app'),
+              content: Text(LocaleKeys.could_not_open_messages_app.tr()),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
@@ -54,7 +57,7 @@ class _HomePageState extends State<HomePage> {
           context: context,
           builder: (context) => AlertDialog(
             title: const Text('Error'),
-            content: Text('Error opening Messages: $e'),
+            content: Text('${LocaleKeys.error_opening_messages.tr()} $e'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -85,9 +88,9 @@ class _HomePageState extends State<HomePage> {
                 'Error',
                 style: TextStyle(fontFamily: 'my', fontWeight: FontWeight.bold),
               ),
-              content: const Text(
-                'Could not open Phone app',
-                style: TextStyle(fontFamily: 'my'),
+              content: Text(
+                LocaleKeys.could_not_open_phone_app.tr(),
+                style: const TextStyle(fontFamily: 'my'),
               ),
               actions: [
                 TextButton(
@@ -108,7 +111,7 @@ class _HomePageState extends State<HomePage> {
           context: context,
           builder: (context) => AlertDialog(
             title: const Text('Error'),
-            content: Text('Error making call: $e'),
+            content: Text('${LocaleKeys.error_making_call.tr()} $e'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -130,17 +133,17 @@ class _HomePageState extends State<HomePage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
-          title: const Row(
+          title: Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.warning_amber_rounded,
                 color: Colors.amber,
                 size: 28,
               ),
               SizedBox(width: 10),
               Text(
-                'Delete Contact',
-                style: TextStyle(
+                LocaleKeys.delete_contact.tr(),
+                style: const TextStyle(
                   fontFamily: 'my',
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -148,9 +151,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          content: const Text(
-            'Are you sure you want to delete this contact?\nThis action cannot be undone.',
-            style: TextStyle(fontSize: 16, fontFamily: 'my'),
+          content: Text(
+            LocaleKeys.delete_confirmation.tr(),
+            style: const TextStyle(fontSize: 16, fontFamily: 'my'),
           ),
           actions: [
             TextButton.icon(
@@ -159,9 +162,9 @@ class _HomePageState extends State<HomePage> {
                 color: Color.fromARGB(255, 0, 0, 0),
                 size: 20,
               ),
-              label: const Text(
-                'Cancel',
-                style: TextStyle(
+              label: Text(
+                LocaleKeys.cancel.tr(),
+                style: const TextStyle(
                   color: Color.fromARGB(255, 0, 0, 0),
                   fontWeight: FontWeight.bold,
                 ),
@@ -184,9 +187,9 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white,
                 size: 20,
               ),
-              label: const Text(
-                'Delete',
-                style: TextStyle(
+              label: Text(
+                LocaleKeys.delete.tr(),
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
@@ -204,8 +207,9 @@ class _HomePageState extends State<HomePage> {
                 await widget.contact.delete();
                 if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Contact deleted successfully'),
+                    SnackBar(
+                      content:
+                          Text(LocaleKeys.contact_deleted_successfully.tr()),
                       backgroundColor: Colors.green,
                     ),
                   );
@@ -280,7 +284,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       MyColumn(
                         mycolor: const Color(0xFFF7941D),
-                        text: 'message',
+                        text: LocaleKeys.message.tr(),
                         icon: IconButton(
                           onPressed: phoneNumber != null
                               ? () => _sendMessage(phoneNumber)
@@ -313,7 +317,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       MyColumn(
                         mycolor: const Color(0xFF28B33E),
-                        text: 'call',
+                        text: LocaleKeys.call.tr(),
                         icon: IconButton(
                           onPressed: phoneNumber != null
                               ? () => _makePhoneCall(phoneNumber)
@@ -332,30 +336,30 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(height: 20),
                       Contactinfos(
                         icon: const Icon(Icons.contacts),
-                        text: 'First name',
+                        text: LocaleKeys.first_name.tr(),
                         hintText: contact.name.first,
                       ),
                       const SizedBox(height: 15),
                       Contactinfos(
                         icon: const Icon(Icons.contacts_rounded),
-                        text: 'Last name',
+                        text: LocaleKeys.last_name.tr(),
                         hintText: contact.name.last,
                       ),
                       const SizedBox(height: 15),
                       Contactinfos(
                         icon: const Icon(Icons.phone),
-                        text: 'Phone Number',
+                        text: LocaleKeys.phone_number.tr(),
                         hintText: contact.phones.isNotEmpty
                             ? contact.phones.first.number
-                            : 'No number available',
+                            : LocaleKeys.no_number_available.tr(),
                       ),
                       const SizedBox(height: 15),
                       Contactinfos(
                         icon: const Icon(Icons.email),
-                        text: 'Email',
+                        text: LocaleKeys.email.tr(),
                         hintText: contact.emails.isNotEmpty
                             ? contact.emails.last.address
-                            : 'No Email available',
+                            : LocaleKeys.no_email_available.tr(),
                       ),
                       const SizedBox(height: 40),
                       // Delete button at the bottom
@@ -367,9 +371,9 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.white,
                             size: 24,
                           ),
-                          label: const Text(
-                            'Delete Contact',
-                            style: TextStyle(
+                          label: Text(
+                            LocaleKeys.delete_contact.tr(),
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

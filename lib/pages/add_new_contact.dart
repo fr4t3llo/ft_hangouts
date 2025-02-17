@@ -3,10 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:ft_hangouts/pages/components/editcontactinfo.dart';
 import 'package:ft_hangouts/pages/contact_page.dart';
+import 'package:ft_hangouts/translations/locale_keys.g.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart';
+import '../translations/locale_keys.g.dart';
 
 class AddContactPage extends StatefulWidget {
   const AddContactPage({super.key});
@@ -50,7 +54,7 @@ class _AddContactPageState extends State<AddContactPage> {
     try {
       // Request permission to add contacts
       if (!await FlutterContacts.requestPermission(readonly: false)) {
-        throw Exception('Permission denied');
+        throw Exception(LocaleKeys.permission_denied.tr());
       }
 
       // Create a new contact
@@ -65,8 +69,8 @@ class _AddContactPageState extends State<AddContactPage> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Contact added successfully'),
+          SnackBar(
+            content: Text(LocaleKeys.contact_added_successfully.tr()),
             backgroundColor: Colors.green,
           ),
         );
@@ -81,7 +85,7 @@ class _AddContactPageState extends State<AddContactPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error adding contact: $e'),
+            content: Text('${LocaleKeys.error_adding_contact.tr()} $e'),
             backgroundColor: Colors.red,
           ),
         );
@@ -113,9 +117,10 @@ class _AddContactPageState extends State<AddContactPage> {
               MaterialPageRoute(builder: (context) => const ContactPage()),
             ),
           ),
-          title: const Text(
-            'Add Contact',
-            style: TextStyle(fontFamily: 'my', fontWeight: FontWeight.bold),
+          title: Text(
+            LocaleKeys.add_contact.tr(),
+            style:
+                const TextStyle(fontFamily: 'my', fontWeight: FontWeight.bold),
           ),
           actions: [
             if (_isSaving)
@@ -140,26 +145,26 @@ class _AddContactPageState extends State<AddContactPage> {
               children: [
                 const SizedBox(height: 30),
                 Editcontactinfo(
-                  icon: const Icon(Icons.contacts),
-                  text: 'First name',
+                  icon: Icon(Icons.contacts),
+                  text: LocaleKeys.first_name.tr(),
                   controller: firstNameController,
                 ),
                 const SizedBox(height: 15),
                 Editcontactinfo(
                   icon: const Icon(Icons.contacts_rounded),
-                  text: 'Last name',
+                  text: LocaleKeys.last_name.tr(),
                   controller: lastNameController,
                 ),
                 const SizedBox(height: 15),
                 Editcontactinfo(
                   icon: const Icon(Icons.phone),
-                  text: 'Phone Number',
+                  text: LocaleKeys.phone_number.tr(),
                   controller: phoneController,
                 ),
                 const SizedBox(height: 15),
                 Editcontactinfo(
                   icon: const Icon(Icons.email),
-                  text: 'Email',
+                  text: LocaleKeys.email.tr(),
                   controller: emailController,
                 ),
               ],

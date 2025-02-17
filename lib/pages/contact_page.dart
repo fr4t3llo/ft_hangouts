@@ -122,25 +122,25 @@ class _ContactPageState extends State<ContactPage> {
                     position: const RelativeRect.fromLTRB(
                         100, 50, 0, 0), // Position the menu
                     items: [
-                      const PopupMenuItem<Color>(
+                      PopupMenuItem<Color>(
                         value: Colors.white,
-                        child: Text('White'),
+                        child: Text(LocaleKeys.white.tr()),
                       ),
-                      const PopupMenuItem<Color>(
+                      PopupMenuItem<Color>(
                         value: Colors.blue,
-                        child: Text('Blue'),
+                        child: Text(LocaleKeys.blue.tr()),
                       ),
-                      const PopupMenuItem<Color>(
+                      PopupMenuItem<Color>(
                         value: Colors.red,
-                        child: Text('Red'),
+                        child: Text(LocaleKeys.red.tr()),
                       ),
-                      const PopupMenuItem<Color>(
+                      PopupMenuItem<Color>(
                         value: Colors.green,
-                        child: Text('Green'),
+                        child: Text(LocaleKeys.green.tr()),
                       ),
-                      const PopupMenuItem<Color>(
+                      PopupMenuItem<Color>(
                         value: Colors.purple,
-                        child: Text('Purple'),
+                        child: Text(LocaleKeys.purple.tr()),
                       ),
                     ],
                   ).then((value) {
@@ -168,6 +168,7 @@ class _ContactPageState extends State<ContactPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
+                // LocaleKeys.error.tr(),
                 _error!,
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Colors.red),
@@ -175,7 +176,7 @@ class _ContactPageState extends State<ContactPage> {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: _checkPermissionAndFetchContacts,
-                child: const Text('Retry'),
+                child: const Text(LocaleKeys.retry),
               ),
             ],
           ),
@@ -190,14 +191,14 @@ class _ContactPageState extends State<ContactPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Please grant permission to access contacts in your device settings.',
+              Text(
+                LocaleKeys.please_grant_permission.tr(),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: _checkPermissionAndFetchContacts,
-                child: const Text('Request Permission'),
+                child:  Text(LocaleKeys.request_permission.tr()),
               ),
             ],
           ),
