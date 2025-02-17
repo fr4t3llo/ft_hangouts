@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ft_hangouts/pages/add_new_contact.dart';
 import 'package:ft_hangouts/pages/single_contact.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
@@ -80,7 +81,13 @@ class _ContactPageState extends State<ContactPage> {
             backgroundColor: appBarColorProvider.appBarColor,
             leading: IconButton(
               icon: const Icon(Iconsax.add, color: Colors.black),
-              onPressed: () => {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AddContactPage()),
+                );
+              },
             ),
             title: const Text(
               'Contact',
@@ -99,6 +106,10 @@ class _ContactPageState extends State<ContactPage> {
                     position: const RelativeRect.fromLTRB(
                         100, 50, 0, 0), // Position the menu
                     items: [
+                      const PopupMenuItem<Color>(
+                        value: Colors.white,
+                        child: Text('White'),
+                      ),
                       const PopupMenuItem<Color>(
                         value: Colors.blue,
                         child: Text('Blue'),
