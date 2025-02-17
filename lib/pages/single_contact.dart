@@ -14,7 +14,6 @@ import 'package:provider/provider.dart';
 import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
 import 'contact_page.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../translations/locale_keys.g.dart';
 
 class HomePage extends StatefulWidget {
   final Contact contact;

@@ -9,9 +9,6 @@ import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../translations/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
-import '../translations/locale_keys.g.dart';
 class EditContact extends StatefulWidget {
   final Contact contact;
 

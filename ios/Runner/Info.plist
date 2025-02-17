@@ -8,7 +8,12 @@
 	  <string>tel</string>
 	</array>
 	<key>NSContactsUsageDescription</key>
-	<string>This app requires access to contacts to view, edit and manage your phone contacts.</string>
+	<string>This app requires access to contacts to view, edit and manage your phone contacts and We need your permission to create contacts.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+	  <string>fetch</string>
+	  <string>remote-notification</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

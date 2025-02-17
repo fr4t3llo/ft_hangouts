@@ -9,8 +9,6 @@ import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization/easy_localization.dart';
-import '../translations/locale_keys.g.dart';
 
 class AddContactPage extends StatefulWidget {
   const AddContactPage({super.key});
@@ -104,6 +102,7 @@ class _AddContactPageState extends State<AddContactPage> {
     return Consumer<AppBarColorProvider>(
         builder: (context, appBarColorProvider, child) {
       return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: appBarColorProvider.appBarColor,
           leading: IconButton(
@@ -145,6 +144,7 @@ class _AddContactPageState extends State<AddContactPage> {
               children: [
                 const SizedBox(height: 30),
                 Editcontactinfo(
+                  
                   icon: Icon(Icons.contacts),
                   text: LocaleKeys.first_name.tr(),
                   controller: firstNameController,

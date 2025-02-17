@@ -10,7 +10,6 @@ import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
 // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../translations/locale_keys.g.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({super.key});
@@ -75,6 +74,7 @@ class _ContactPageState extends State<ContactPage> {
     return Consumer<AppBarColorProvider>(
       builder: (context, appBarColorProvider, child) {
         return Scaffold(
+          backgroundColor: Colors.white,
           appBar: AppBar(
             backgroundColor: appBarColorProvider.appBarColor,
             leading: IconButton(
@@ -83,7 +83,8 @@ class _ContactPageState extends State<ContactPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const AddContactPage()),
+                    builder: (context) => const AddContactPage(),
+                  ),
                 );
               },
             ),
@@ -101,6 +102,7 @@ class _ContactPageState extends State<ContactPage> {
                   // Show the PopupMenuButton to choose a color or language
                   showMenu<dynamic>(
                     context: context,
+                    color: Colors.white,
                     position: const RelativeRect.fromLTRB(
                         100, 50, 0, 0), // Position the menu
                     items: [
