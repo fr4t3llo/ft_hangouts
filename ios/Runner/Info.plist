@@ -14,6 +14,10 @@
 	  <string>fetch</string>
 	  <string>remote-notification</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs camera access to take contact photos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs photos access to select contact photos</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

@@ -3,6 +3,13 @@
 // ignore_for_file: constant_identifier_names
 
 abstract class  LocaleKeys {
+  static const sms_permission_denied = 'sms_permission_denied';
+  static const error_loading_messages = 'error_loading_messages';
+  static const error_sending_message = 'error_sending_message';
+  static const type_message = 'type_message';
+  static const choose_from_gallery = 'choose_from_gallery';
+  static const take_photo = 'take_photo';
+  static const error_picking_image = 'error_picking_image';
   static const contact = 'contact';
   static const language = 'language';
   static const app_bar_color = 'app_bar_color';

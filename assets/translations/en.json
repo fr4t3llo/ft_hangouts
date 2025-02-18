@@ -1,4 +1,11 @@
 {
+  "sms_permission_denied" :"SMS permission denied",
+  "error_loading_messages" : "Error loading messages",
+  "error_sending_message" : "Error sending messages",
+  "type_message" : "Type message",
+  "choose_from_gallery" : "Choose from gallery",
+  "take_photo" : "Take picture",
+  "error_picking_image" : "Error picking image",
   "contact": "Contact",
   "language": "language",
   "app_bar_color": "AppBar Color",

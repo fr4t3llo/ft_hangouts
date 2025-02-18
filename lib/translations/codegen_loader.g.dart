@@ -15,6 +15,13 @@ class CodegenLoader extends AssetLoader{
   }
 
   static const Map<String,dynamic> _en = {
+  "sms_permission_denied": "SMS permission denied",
+  "error_loading_messages": "Error loading messages",
+  "error_sending_message": "Error sending messages",
+  "type_message": "Type message",
+  "choose_from_gallery": "Choose from gallery",
+  "take_photo": "Take picture",
+  "error_picking_image": "Error picking image",
   "contact": "Contact",
   "language": "language",
   "app_bar_color": "AppBar Color",
@@ -57,6 +64,13 @@ class CodegenLoader extends AssetLoader{
   "purple": "Purple"
 };
 static const Map<String,dynamic> _es = {
+  "sms_permission_denied": "Permiso de SMS denegado",
+  "error_loading_messages": "Error al cargar los mensajes",
+  "error_sending_message": "Error al enviar los mensajes",
+  "type_message": "Escribir mensaje",
+  "choose_from_gallery": "Elegir de la galería",
+  "take_photo": "Tomar foto",
+  "error_picking_image": "Error al seleccionar la imagen",
   "contact": "Contacto",
   "language": "idioma",
   "app_bar_color": "Color de la barra de la aplicación",

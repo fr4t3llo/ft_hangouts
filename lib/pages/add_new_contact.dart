@@ -144,7 +144,6 @@ class _AddContactPageState extends State<AddContactPage> {
               children: [
                 const SizedBox(height: 30),
                 Editcontactinfo(
-                  
                   icon: Icon(Icons.contacts),
                   text: LocaleKeys.first_name.tr(),
                   controller: firstNameController,

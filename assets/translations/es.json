@@ -1,4 +1,11 @@
 {
+    "sms_permission_denied": "Permiso de SMS denegado",
+    "error_loading_messages": "Error al cargar los mensajes",
+    "error_sending_message": "Error al enviar los mensajes",
+    "type_message": "Escribir mensaje",  
+    "choose_from_gallery": "Elegir de la galería",
+    "take_photo": "Tomar foto",
+    "error_picking_image": "Error al seleccionar la imagen",
     "contact": "Contacto",
     "language": "idioma",
     "app_bar_color": "Color de la barra de la aplicación",
