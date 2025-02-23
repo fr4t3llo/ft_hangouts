@@ -242,6 +242,7 @@ class _ContactPageState extends State<ContactPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
+
                 LocaleKeys.please_grant_permission.tr(),
                 textAlign: TextAlign.center,
               ),

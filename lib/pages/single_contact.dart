@@ -25,49 +25,49 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<void> _sendMessage(String phoneNumber) async {
-    // Format phone number by removing any spaces, dashes, or parentheses
-    final formattedNumber = phoneNumber.replaceAll(RegExp(r'[\s\-\(\)]'), '');
-    final Uri smsUri = Uri.parse('sms:$formattedNumber');
+  // Future<void> _sendMessage(String phoneNumber) async {
+  //   // Format phone number by removing any spaces, dashes, or parentheses
+  //   final formattedNumber = phoneNumber.replaceAll(RegExp(r'[\s\-\(\)]'), '');
+  //   final Uri smsUri = Uri.parse('sms:$formattedNumber');
 
-    try {
-      if (await canLaunchUrl(smsUri)) {
-        await launchUrl(smsUri);
-      } else {
-        if (mounted) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: const Text('Error'),
-              content: Text(LocaleKeys.could_not_open_messages_app.tr()),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('OK'),
-                ),
-              ],
-            ),
-          );
-        }
-      }
-    } catch (e) {
-      if (mounted) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Error'),
-            content: Text('${LocaleKeys.error_opening_messages.tr()} $e'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
-      }
-    }
-  }
+  //   try {
+  //     if (await canLaunchUrl(smsUri)) {
+  //       await launchUrl(smsUri);
+  //     } else {
+  //       if (mounted) {
+  //         showDialog(
+  //           context: context,
+  //           builder: (context) => AlertDialog(
+  //             title: const Text('Error'),
+  //             content: Text(LocaleKeys.could_not_open_messages_app.tr()),
+  //             actions: [
+  //               TextButton(
+  //                 onPressed: () => Navigator.pop(context),
+  //                 child: const Text('OK'),
+  //               ),
+  //             ],
+  //           ),
+  //         );
+  //       }
+  //     }
+  //   } catch (e) {
+  //     if (mounted) {
+  //       showDialog(
+  //         context: context,
+  //         builder: (context) => AlertDialog(
+  //           title: const Text('Error'),
+  //           content: Text('${LocaleKeys.error_opening_messages.tr()} $e'),
+  //           actions: [
+  //             TextButton(
+  //               onPressed: () => Navigator.pop(context),
+  //               child: const Text('OK'),
+  //             ),
+  //           ],
+  //         ),
+  //       );
+  //     }
+  //   }
+  // }
 
   Future<void> _makePhoneCall(String phoneNumber) async {
     // Format phone number by removing any spaces, dashes, or parentheses
@@ -285,9 +285,10 @@ class _HomePageState extends State<HomePage> {
                         mycolor: const Color(0xFFF7941D),
                         text: LocaleKeys.message.tr(),
                         icon: IconButton(
-                          onPressed: phoneNumber != null
-                              ? () => _sendMessage(phoneNumber)
-                              : null,
+                          onPressed: () {},
+                          // onPressed: phoneNumber != null
+                          // ? () => _sendMessage(phoneNumber)
+                          // : null,
                           icon: const Icon(
                             Iconsax.message,
                             color: Color.fromARGB(255, 255, 128, 0),
@@ -401,3 +402,5 @@ class _HomePageState extends State<HomePage> {
   }
 }
 //need some improvements
+
+
