@@ -131,6 +131,7 @@ class _EditContactState extends State<EditContact> {
         contact.phones = [Phone(phoneController.text.trim())];
       }
 
+
       if (emailController.text.trim().isNotEmpty) {
         contact.emails = [Email(emailController.text.trim())];
       }
