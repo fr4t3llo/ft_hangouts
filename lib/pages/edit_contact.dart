@@ -136,6 +136,7 @@ class _EditContactState extends State<EditContact> {
         contact.emails = [Email(emailController.text.trim())];
       }
 
+
       // Update photo if a new one was selected
       if (_imageFile != null) {
         contact.photo = await _imageFile!.readAsBytes();
