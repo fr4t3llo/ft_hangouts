@@ -144,6 +144,7 @@ class _EditContactState extends State<EditContact> {
       await contact.update();
 
 
+
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
