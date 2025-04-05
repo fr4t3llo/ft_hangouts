@@ -31,6 +31,7 @@ class _ContactPageState extends State<ContactPage> {
     _checkPermissionAndFetchContacts();
   }
 
+
   Future<void> _checkPermissionAndFetchContacts() async {
     try {
       // Request contact permission
