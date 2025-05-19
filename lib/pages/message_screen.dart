@@ -288,6 +288,7 @@ class _MessagePageState extends State<MessagePage> with WidgetsBindingObserver {
     }
 
 
+
     return Consumer<AppBarColorProvider>(
       builder: (context, appBarColorProvider, child) {
         return Scaffold(
