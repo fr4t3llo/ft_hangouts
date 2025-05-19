@@ -287,7 +287,6 @@ class _MessagePageState extends State<MessagePage> with WidgetsBindingObserver {
       return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
     }
 
-
     return Consumer<AppBarColorProvider>(
       builder: (context, appBarColorProvider, child) {
         return Scaffold(
