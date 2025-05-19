@@ -59,7 +59,8 @@ class LifecycleManager extends StatefulWidget {
   State<LifecycleManager> createState() => _LifecycleManagerState();
 }
 
-class _LifecycleManagerState extends State<LifecycleManager> with WidgetsBindingObserver {
+class _LifecycleManagerState extends State<LifecycleManager>
+    with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
@@ -75,7 +76,7 @@ class _LifecycleManagerState extends State<LifecycleManager> with WidgetsBinding
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     final lifecycleProvider = context.read<AppLifecycleProvider>();
-    
+
     switch (state) {
       case AppLifecycleState.paused:
         lifecycleProvider.onAppBackground();

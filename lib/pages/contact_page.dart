@@ -24,8 +24,6 @@ class _ContactPageState extends State<ContactPage> {
   bool _permissionDenied = false;
   String? _error;
 
-  // Default AppBar color
-
   @override
   void initState() {
     super.initState();

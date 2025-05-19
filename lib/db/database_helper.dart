@@ -80,7 +80,7 @@ class DatabaseHelper {
   Future<void> _createDB(Database db, int version) async {
     await db.execute('''
       CREATE TABLE contacts (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id TEXT PRIMARY KEY,
         name TEXT NOT NULL,
         phone TEXT NOT NULL,
         email TEXT,
@@ -106,7 +106,7 @@ class DatabaseHelper {
   }
 
   // Read a single contact
-  Future<Map<String, dynamic>?> getContact(int id) async {
+  Future<Map<String, dynamic>?> getContact(String id) async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
       'contacts',
@@ -131,7 +131,7 @@ class DatabaseHelper {
   }
 
   // Delete a contact
-  Future<int> deleteContact(int id) async {
+  Future<int> deleteContact(String id) async {
     final db = await database;
     return await db.delete(
       'contacts',
@@ -146,7 +146,7 @@ class DatabaseHelper {
     db.close();
   }
 
-  Future<void> updateBackgroundTime(int contactId, int backgroundTime) async {
+  Future<void> updateBackgroundTime(String contactId, int backgroundTime) async {
     final db = await database;
     await db.rawUpdate('''
       UPDATE contacts 

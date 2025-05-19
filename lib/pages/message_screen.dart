@@ -3,6 +3,8 @@ import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:ft_hangouts/pages/components/message.dart';
 import 'package:ft_hangouts/pages/components/message_provider.dart';
+import 'package:ft_hangouts/providers/app_lifecycle_provider.dart';
+import 'package:ft_hangouts/db/database_helper.dart';
 
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
@@ -14,8 +16,7 @@ import 'dart:io' show Platform;
 import 'package:telephony/telephony.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
-import 'package:url_launcher/url_launcher.dart'; // Ensure this is imported
+import 'package:url_launcher/url_launcher.dart';
 
 class MessagePage extends StatefulWidget {
   final Contact contact;
@@ -30,12 +31,13 @@ class MessagePage extends StatefulWidget {
 }
 
 class _MessagePageState extends State<MessagePage> with WidgetsBindingObserver {
-  // Controller for the message input field
   final TextEditingController _messageController = TextEditingController();
   late final Telephony? telephony;
   bool _isLoadingMessages = true;
   late MessageProvider _messageProvider;
   bool _isAndroid = false;
+  int _backgroundTime = 0;
+  final DatabaseHelper _dbHelper = DatabaseHelper.instance;
 
   @override
   void initState() {
@@ -48,27 +50,35 @@ class _MessagePageState extends State<MessagePage> with WidgetsBindingObserver {
     // Initialize message provider
     _messageProvider = Provider.of<MessageProvider>(context, listen: false);
     _loadMessages();
-    
+
     // Only request SMS permissions on Android
     if (_isAndroid) {
       _requestSmsPermissions();
     }
+
+    _loadBackgroundTime();
+    // Set this contact as the current contact for background time tracking
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.contact.id != null) {
+        context.read<AppLifecycleProvider>().setCurrentContact(int.parse(widget.contact.id!));
+      }
+    });
   }
 
   void _checkPlatform() {
-  try {
-    _isAndroid = Platform.isAndroid;
-    if (_isAndroid) {
-      telephony = Telephony.instance;
-    } else {
+    try {
+      _isAndroid = Platform.isAndroid;
+      if (_isAndroid) {
+        telephony = Telephony.instance;
+      } else {
+        telephony = null;
+      }
+    } catch (e) {
+      // Running on web or other platforms that don't support dart:io
+      _isAndroid = false;
       telephony = null;
     }
-  } catch (e) {
-    // Running on web or other platforms that don't support dart:io
-    _isAndroid = false;
-    telephony = null;
   }
-}
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -78,42 +88,6 @@ class _MessagePageState extends State<MessagePage> with WidgetsBindingObserver {
     } else if (state == AppLifecycleState.resumed) {
       // App is coming back to foreground
       _showBackgroundTimeDialog();
-    }
-  }
-
-  Future<void> _showBackgroundTimeDialog() async {
-    final lastBackgroundTime = _messageProvider.lastBackgroundTime;
-    if (lastBackgroundTime != null) {
-      final now = DateTime.now();
-      final difference = now.difference(lastBackgroundTime);
-
-      if (difference.inSeconds > 5) {
-        // Only show if app was in background for more than 5 seconds
-        await Future.delayed(
-            const Duration(milliseconds: 500)); // Short delay to let UI settle
-        if (!mounted) return;
-
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text(LocaleKeys.app_background_time.tr()),
-            content: Text(
-              difference.inMinutes > 0
-                  ? LocaleKeys.app_in_background_for_minutes
-                      .tr(args: [difference.inMinutes.toString()])
-                  : LocaleKeys.app_in_background_for_seconds
-                      .tr(args: [difference.inSeconds.toString()]),
-              style: const TextStyle(fontFamily: 'my'),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(LocaleKeys.ok.tr()),
-              ),
-            ],
-          ),
-        );
-      }
     }
   }
 
@@ -134,7 +108,7 @@ class _MessagePageState extends State<MessagePage> with WidgetsBindingObserver {
 
   Future<void> _requestSmsPermissions() async {
     if (!_isAndroid) return;
-    
+
     // Request SMS permissions
     await Permission.sms.request();
 
@@ -164,94 +138,154 @@ class _MessagePageState extends State<MessagePage> with WidgetsBindingObserver {
     );
   }
 
+  Future<void> _loadBackgroundTime() async {
+    if (widget.contact.id != null) {
+      final contact = await _dbHelper.getContact(widget.contact.id!);
+      if (contact != null) {
+        setState(() {
+          _backgroundTime = (contact['total_background_time'] as int?) ?? 0;
+        });
+      }
+    }
+  }
+
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _messageController.dispose();
     super.dispose();
   }
-// In message_screen.dart
 
-// Add this modified _sendMessage method
-void _sendMessage() async {
-  final messageText = _messageController.text.trim();
-  if (messageText.isEmpty) return;
+  Future<void> _showBackgroundTimeDialog() async {
+    final lastBackgroundTime = _messageProvider.lastBackgroundTime;
+    if (lastBackgroundTime != null) {
+      final now = DateTime.now();
+      final difference = now.difference(lastBackgroundTime);
 
-  // Get contact phone number
-  if (widget.contact.phones.isEmpty) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(LocaleKeys.no_phone_number_available.tr()),
-        backgroundColor: Colors.red,
-      ),
-    );
-    return;
-  }
+      if (difference.inSeconds > 5) {
+        // Only show if app was in background for more than 5 seconds
+        await Future.delayed(const Duration(milliseconds: 500)); // Short delay to let UI settle
+        if (!mounted) return;
 
-  final phoneNumber = widget.contact.phones.first.number;
-  final formattedNumber = phoneNumber.replaceAll(RegExp(r'[\s\-\(\)]'), '');
-
-  // Add message to history first (so it appears immediately in UI)
-  final newMessage = Message(
-    date: DateTime.now(),
-    text: messageText,
-    sentByMe: true,
-    contactId: widget.contact.id,
-  );
-  await _messageProvider.addMessage(newMessage);
-
-  // Try to send the actual SMS based on platform
-  if (_isAndroid && telephony != null) {
-    // Use Telephony package for Android
-    try {
-      await telephony!.sendSms(
-        to: formattedNumber,
-        message: messageText,
-      );
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Error sending SMS: $e'),
-            backgroundColor: Colors.red,
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(LocaleKeys.app_background_time.tr()),
+            content: Text(
+              difference.inMinutes > 0
+                  ? LocaleKeys.app_in_background_for_minutes
+                      .tr(args: [difference.inMinutes.toString()])
+                  : LocaleKeys.app_in_background_for_seconds
+                      .tr(args: [difference.inSeconds.toString()]),
+              style: const TextStyle(fontFamily: 'my'),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(LocaleKeys.ok.tr()),
+              ),
+            ],
           ),
         );
       }
     }
-  } else {
-    // Use url_launcher for iOS
-    final Uri smsUri = Uri.parse('sms:$formattedNumber&body=${Uri.encodeComponent(messageText)}');
-    
-    try {
-      if (await canLaunchUrl(smsUri)) {
-        await launchUrl(smsUri);
-      } else {
+  }
+
+  void _sendMessage() async {
+    final messageText = _messageController.text.trim();
+    if (messageText.isEmpty) return;
+
+    // Get contact phone number
+    if (widget.contact.phones.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(LocaleKeys.no_phone_number_available.tr()),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    final phoneNumber = widget.contact.phones.first.number;
+    final formattedNumber = phoneNumber.replaceAll(RegExp(r'[\s\-\(\)]'), '');
+
+    // Add message to history first (so it appears immediately in UI)
+    final newMessage = Message(
+      date: DateTime.now(),
+      text: messageText,
+      sentByMe: true,
+      contactId: widget.contact.id,
+    );
+    await _messageProvider.addMessage(newMessage);
+
+    // Try to send the actual SMS based on platform
+    if (_isAndroid && telephony != null) {
+      // Use Telephony package for Android
+      try {
+        await telephony!.sendSms(
+          to: formattedNumber,
+          message: messageText,
+        );
+      } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(LocaleKeys.could_not_open_messages_app.tr()),
+              content: Text('Error sending SMS: $e'),
               backgroundColor: Colors.red,
             ),
           );
         }
       }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('${LocaleKeys.error_opening_messages.tr()} $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
+    } else {
+      // Use url_launcher for iOS
+      final Uri smsUri = Uri.parse(
+          'sms:$formattedNumber&body=${Uri.encodeComponent(messageText)}');
+
+      try {
+        if (await canLaunchUrl(smsUri)) {
+          await launchUrl(smsUri);
+        } else {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(LocaleKeys.could_not_open_messages_app.tr()),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('${LocaleKeys.error_opening_messages.tr()} $e'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
       }
     }
+
+    // Clear the text field after sending
+    _messageController.clear();
   }
 
-  // Clear the text field after sending
-  _messageController.clear();
-}
   @override
   Widget build(BuildContext context) {
+    final contact = widget.contact;
+    final lifecycleProvider = context.watch<AppLifecycleProvider>();
+    final currentBackgroundTime = contact.id != null
+        ? lifecycleProvider.getBackgroundTimeForContact(contact.id!)
+        : 0;
+    final totalBackgroundTime = _backgroundTime + currentBackgroundTime;
+
+    String formatDuration(int seconds) {
+      final hours = seconds ~/ 3600;
+      final minutes = (seconds % 3600) ~/ 60;
+      final remainingSeconds = seconds % 60;
+      return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
+    }
+
     return Consumer<AppBarColorProvider>(
       builder: (context, appBarColorProvider, child) {
         return Scaffold(
@@ -262,27 +296,24 @@ void _sendMessage() async {
               icon: const Icon(Iconsax.back_square, color: Colors.black),
               onPressed: () => Navigator.pop(context),
             ),
-            title: Row(
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  backgroundImage: widget.contact.photo != null
-                      ? MemoryImage(widget.contact.photo!)
-                      : null,
-                  child: widget.contact.photo == null
-                      ? Text(
-                          widget.contact.displayName.isNotEmpty
-                              ? widget.contact.displayName[0].toUpperCase()
-                              : '?',
-                        )
-                      : null,
-                ),
-                const SizedBox(width: 10),
                 Text(
-                  widget.contact.displayName,
+                  '${widget.contact.displayName}',
                   style: const TextStyle(
                     fontFamily: 'my',
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
+                  ),
+                ),
+                // Add background time display
+                Text(
+                  '${LocaleKeys.app_background_time.tr()}: ${formatDuration(totalBackgroundTime)}',
+                  style: const TextStyle(
+                    fontFamily: 'my',
+                    fontSize: 12,
+                    color: Colors.grey,
                   ),
                 ),
               ],

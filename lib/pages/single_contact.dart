@@ -13,6 +13,8 @@ import 'package:url_launcher/url_launcher.dart';
 // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 import 'package:ft_hangouts/pages/components/change_appbar_color.dart';
+import 'package:ft_hangouts/providers/app_lifecycle_provider.dart';
+import 'package:ft_hangouts/db/database_helper.dart';
 import 'contact_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -26,6 +28,32 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _backgroundTime = 0;
+  final DatabaseHelper _dbHelper = DatabaseHelper.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadBackgroundTime();
+    // Set this contact as the current contact for background time tracking
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.contact.id != null) {
+        context.read<AppLifecycleProvider>().setCurrentContact(int.parse(widget.contact.id!));
+      }
+    });
+  }
+
+  Future<void> _loadBackgroundTime() async {
+    if (widget.contact.id != null) {
+      final contact = await _dbHelper.getContact(widget.contact.id!);
+      if (contact != null) {
+        setState(() {
+          _backgroundTime = (contact['total_background_time'] as int?) ?? 0;
+        });
+      }
+    }
+  }
+
   Future<void> _sendMessage(String phoneNumber) async {
     // Format phone number by removing any spaces, dashes, or parentheses
     final formattedNumber = phoneNumber.replaceAll(RegExp(r'[\s\-\(\)]'), '');
@@ -244,6 +272,18 @@ class _HomePageState extends State<HomePage> {
     final contact = widget.contact;
     final phoneNumber =
         contact.phones.isNotEmpty ? contact.phones.first.number : null;
+    final lifecycleProvider = context.watch<AppLifecycleProvider>();
+    final currentBackgroundTime = contact.id != null 
+        ? lifecycleProvider.getBackgroundTimeForContact(contact.id!)
+        : 0;
+    final totalBackgroundTime = _backgroundTime + currentBackgroundTime;
+
+    String formatDuration(int seconds) {
+      final hours = seconds ~/ 3600;
+      final minutes = (seconds % 3600) ~/ 60;
+      final remainingSeconds = seconds % 60;
+      return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
+    }
 
     return Consumer<AppBarColorProvider>(
       builder: (context, appBarColorProvider, child) {
@@ -291,6 +331,31 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   const SizedBox(height: 10),
+                  // Add background time display
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.grey[300]!),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.timer, color: Colors.orange),
+                        const SizedBox(width: 10),
+                        Text(
+                          '${LocaleKeys.app_background_time.tr()}: ${formatDuration(totalBackgroundTime)}',
+                          style: const TextStyle(
+                            fontFamily: 'my',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
