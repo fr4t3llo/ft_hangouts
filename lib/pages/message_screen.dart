@@ -277,6 +277,7 @@ class _MessagePageState extends State<MessagePage> with WidgetsBindingObserver {
     final currentBackgroundTime = contact.id != null
         ? lifecycleProvider.getBackgroundTimeForContact(contact.id!)
         : 0;
+        
     final totalBackgroundTime = _backgroundTime + currentBackgroundTime;
 
     String formatDuration(int seconds) {
