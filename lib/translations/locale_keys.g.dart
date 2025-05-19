@@ -2,7 +2,17 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class  LocaleKeys {
+abstract class LocaleKeys {
+  static const sms_not_supported = 'sms_not_supported';
+  static const app_background_time = 'app_background_time';
+  static const app_in_background_for_minutes = 'app_in_background_for_minutes';
+  static const app_in_background_for_seconds = 'app_in_background_for_seconds';
+  static const no_messages_yet = 'no_messages_yet';
+  static const type_your_message = 'type_your_message';
+  static const today = 'today';
+  static const yesterday = 'yesterday';
+  static const no_phone_number_available = 'no_phone_number_available';
+  static const no_messages = 'no_messages';
   static const sms_permission_denied = 'sms_permission_denied';
   static const error_loading_messages = 'error_loading_messages';
   static const error_sending_message = 'error_sending_message';
@@ -50,5 +60,4 @@ abstract class  LocaleKeys {
   static const red = 'red';
   static const green = 'green';
   static const purple = 'purple';
-
 }

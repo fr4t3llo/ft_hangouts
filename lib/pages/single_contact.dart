@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ft_hangouts/pages/components/column.dart';
 import 'package:ft_hangouts/pages/components/contactinfos.dart';
 import 'package:ft_hangouts/pages/edit_contact.dart';
+import 'package:ft_hangouts/pages/message_screen.dart';
 import 'package:ft_hangouts/translations/locale_keys.g.dart';
 // ignore: depend_on_referenced_packages
 import 'package:iconsax/iconsax.dart';
@@ -25,49 +26,61 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Future<void> _sendMessage(String phoneNumber) async {
-  //   // Format phone number by removing any spaces, dashes, or parentheses
-  //   final formattedNumber = phoneNumber.replaceAll(RegExp(r'[\s\-\(\)]'), '');
-  //   final Uri smsUri = Uri.parse('sms:$formattedNumber');
+  Future<void> _sendMessage(String phoneNumber) async {
+    // Format phone number by removing any spaces, dashes, or parentheses
+    final formattedNumber = phoneNumber.replaceAll(RegExp(r'[\s\-\(\)]'), '');
 
-  //   try {
-  //     if (await canLaunchUrl(smsUri)) {
-  //       await launchUrl(smsUri);
-  //     } else {
-  //       if (mounted) {
-  //         showDialog(
-  //           context: context,
-  //           builder: (context) => AlertDialog(
-  //             title: const Text('Error'),
-  //             content: Text(LocaleKeys.could_not_open_messages_app.tr()),
-  //             actions: [
-  //               TextButton(
-  //                 onPressed: () => Navigator.pop(context),
-  //                 child: const Text('OK'),
-  //               ),
-  //             ],
-  //           ),
-  //         );
-  //       }
-  //     }
-  //   } catch (e) {
-  //     if (mounted) {
-  //       showDialog(
-  //         context: context,
-  //         builder: (context) => AlertDialog(
-  //           title: const Text('Error'),
-  //           content: Text('${LocaleKeys.error_opening_messages.tr()} $e'),
-  //           actions: [
-  //             TextButton(
-  //               onPressed: () => Navigator.pop(context),
-  //               child: const Text('OK'),
-  //             ),
-  //           ],
-  //         ),
-  //       );
-  //     }
-  //   }
-  // }
+    // Try to navigate to message page first (your app's internal messaging)
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MessagePage(contact: widget.contact),
+      ),
+    );
+
+    /* Uncomment this if you prefer to launch the native messaging app directly 
+  // Or use the following to launch the device's SMS app
+  final Uri smsUri = Uri.parse('sms:$formattedNumber');
+
+  try {
+    if (await canLaunchUrl(smsUri)) {
+      await launchUrl(smsUri);
+    } else {
+      if (mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Error'),
+            content: Text(LocaleKeys.could_not_open_messages_app.tr()),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+    }
+  } catch (e) {
+    if (mounted) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: Text('${LocaleKeys.error_opening_messages.tr()} $e'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+  */
+  }
 
   Future<void> _makePhoneCall(String phoneNumber) async {
     // Format phone number by removing any spaces, dashes, or parentheses
@@ -285,10 +298,9 @@ class _HomePageState extends State<HomePage> {
                         mycolor: const Color(0xFFF7941D),
                         text: LocaleKeys.message.tr(),
                         icon: IconButton(
-                          onPressed: () {},
-                          // onPressed: phoneNumber != null
-                          // ? () => _sendMessage(phoneNumber)
-                          // : null,
+                          onPressed: phoneNumber != null
+                              ? () => _sendMessage(phoneNumber)
+                              : null,
                           icon: const Icon(
                             Iconsax.message,
                             color: Color.fromARGB(255, 255, 128, 0),

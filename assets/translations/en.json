@@ -1,4 +1,8 @@
 {
+  "today": "Today",
+  "yesterday": "Yesterday",
+  "no_messages": "No messages yet",
+  "type_your_message": "Type your message...",
   "sms_permission_denied" :"SMS permission denied",
   "error_loading_messages" : "Error loading messages",
   "error_sending_message" : "Error sending messages",

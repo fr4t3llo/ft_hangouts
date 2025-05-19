@@ -77,16 +77,16 @@ class DatabaseHelper {
   }
 
   // Create the contacts table
-  Future _createDB(Database db, int version) async {
+  Future<void> _createDB(Database db, int version) async {
     await db.execute('''
       CREATE TABLE contacts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        phoneNumber TEXT,
+        phone TEXT NOT NULL,
         email TEXT,
-        photo BLOB,
-        address TEXT,
-        notes TEXT
+        avatar TEXT,
+        last_background_time INTEGER,
+        total_background_time INTEGER DEFAULT 0
       )
     ''');
   }
@@ -94,51 +94,45 @@ class DatabaseHelper {
   // CRUD Operations
 
   // Create a new contact
-  Future<int> insertContact(ContactModel contact) async {
-    final db = await instance.database;
-    return await db.insert('contacts', contact.toMap());
+  Future<int> insertContact(Map<String, dynamic> contact) async {
+    final db = await database;
+    return await db.insert('contacts', contact);
   }
 
   // Read all contacts
-  Future<List<ContactModel>> getAllContacts() async {
-    final db = await instance.database;
-    final List<Map<String, dynamic>> maps = await db.query('contacts');
-    
-    return List.generate(maps.length, (i) {
-      return ContactModel.fromMap(maps[i]);
-    });
+  Future<List<Map<String, dynamic>>> getAllContacts() async {
+    final db = await database;
+    return await db.query('contacts', orderBy: 'name');
   }
 
   // Read a single contact
-  Future<ContactModel?> getContact(int id) async {
-    final db = await instance.database;
-    final maps = await db.query(
+  Future<Map<String, dynamic>?> getContact(int id) async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
       'contacts',
       where: 'id = ?',
       whereArgs: [id],
     );
-
     if (maps.isNotEmpty) {
-      return ContactModel.fromMap(maps.first);
-    } else {
-      return null;
+      return maps.first;
     }
+    return null;
   }
 
   // Update a contact
-  Future<int> updateContact(ContactModel contact) async {
-    final db = await instance.database;
+  Future<int> updateContact(Map<String, dynamic> contact) async {
+    final db = await database;
     return await db.update(
       'contacts',
-      contact.toMap(),
+      contact,
       where: 'id = ?',
-      whereArgs: [contact.id],
+      whereArgs: [contact['id']],
     );
   }
 
   // Delete a contact
   Future<int> deleteContact(int id) async {
-    final db = await instance.database;
+    final db = await database;
     return await db.delete(
       'contacts',
       where: 'id = ?',
@@ -148,7 +142,17 @@ class DatabaseHelper {
 
   // Close database
   Future close() async {
-    final db = await instance.database;
+    final db = await database;
     db.close();
+  }
+
+  Future<void> updateBackgroundTime(int contactId, int backgroundTime) async {
+    final db = await database;
+    await db.rawUpdate('''
+      UPDATE contacts 
+      SET last_background_time = ?, 
+          total_background_time = total_background_time + ? 
+      WHERE id = ?
+    ''', [backgroundTime, backgroundTime, contactId]);
   }
 }
