@@ -30,6 +30,7 @@ class MessagePage extends StatefulWidget {
   State<MessagePage> createState() => _MessagePageState();
 }
 
+
 class _MessagePageState extends State<MessagePage> with WidgetsBindingObserver {
   final TextEditingController _messageController = TextEditingController();
   late final Telephony? telephony;
